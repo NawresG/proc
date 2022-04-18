@@ -1,9 +1,10 @@
 ///*** dot product function ***///
 
-FUNCTION dot_product(VAR v1: ARRAY_OF FLOAT, VAR v2; ARRAY_OF FLOAT, n:INTEGER) : FLOAT
+FUNCTION dot_product(v1: ARRAY_OF FLOAT,v2; ARRAY_OF FLOAT, ps: FLOAT  ) : FLOAT
 VAR
-    ps: FLOAT ;
-    i: integer;
+     n:INTEGER;
+   
+      i: INTEGER;
 BEGIN
     ps:= 0.0;
     FOR i FROM 0 TO n-1 STEP 1  DO
@@ -28,9 +29,9 @@ BEGIN
         Read(v2[i]) 
     END_FOR
 
-    write("The dot product is: ", dot_product(v1, v2, n))
+    write("The dot product is: ", dot_product(v1, v2, ps))
 
-IF (dot_product(v1, v2, n) = 0.0) THEN
+IF (dot_product(v1, v2, ps) = 0.0) THEN
     write(v1 " and " v2 " are orthogonal")
 END_IF
 
@@ -38,20 +39,16 @@ END
 ///*** dot product Procedure ***///
 
 
-PROCEDURE dot_product (V1:ARRAY_OF FLOAT, v2:ARRAY_OF FLOAT, n: INTEGER)
+PROCEDURE dot_product (V1:ARRAY_OF FLOAT, v2:ARRAY_OF FLOAT, var ps: FLOAT)
 VAR
     i: INTEGER ;
-    ps: FLOAT;
+   n: INTEGER
 BEGIN
     ps:=0.0
     FOR i FROM 0 TO n-1 STEP 1  DO
     ps := ps + V1[i]*v2[i]
     END_FOR
-    write("the dot product is: ", ps )
-
-    IF (ps=0.0) THEN
-    Write(v1  " and "  v2  " are orthogonal")
-    END_IF
+ 
 END
 
 
@@ -69,8 +66,12 @@ BEGIN
         Read(v1[i])
         Read(v2[i]) 
     END_FOR
+       write("the dot product is: ", ps )
+      ps=dot_product(v1, v2, ps)
+     IF (ps=0.0) THEN
+      Write(v1  " and "  v2  " are orthogonal")
+    END_IF
     
-    dot_product(v1, v2, n)
 
 
 END
